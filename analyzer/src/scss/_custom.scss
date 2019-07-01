@@ -1,0 +1,21 @@
+// Here you can add other styles
+.error-message{
+    color: red;
+    font-weight: 600;
+}
+
+.loading{
+    text-align: center;
+    margin: 2em 0;
+    .fa-spin{
+        font-size: 3em;
+    }
+}
+
+.table{
+    tbody{
+        td:first-child{
+            font-weight: 600
+        }
+    }
+}

@@ -1,0 +1,13 @@
+version: '3.0' # specify docker-compose version
+ 
+# Define the services/ containers to be run
+services:
+ angular: # name of the first service
+  build: analyzer # specify the directory of the Dockerfile
+  ports:
+  - "4200:4200" # specify port mapping
+ 
+ node: # name of the second service
+  build: web_server # specify the directory of the Dockerfile
+  ports:
+  - "3001:3001" #specify ports mapping

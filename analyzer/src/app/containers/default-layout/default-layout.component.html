@@ -1,0 +1,73 @@
+<div class="app flex-row">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="clearfix">
+          <h1 class="text-center display-3">URL ANALYZER</h1>
+        </div>
+        <div class="clearfix">
+          <p><strong>Enter URL: (Valid URL with http://)</strong></p>
+        </div>
+        <div class="input-prepend input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text"><i class="fa fa-link"></i></span>
+          </div>
+          <input id="prependedInput" class="form-control" [(ngModel)]="urlLink" type="url" placeholder="Enter URL">
+          <span class="input-group-append">
+            <button class="btn btn-info" type="button" (click)="analyzUrl()">Analyze</button>
+          </span>
+        </div>
+        <div class="clearfix">
+          <p class="error-message" *ngIf="errorMessage">Enter valid URL</p>
+        </div>
+      </div>
+    </div>
+    <div class="row justify-content-center mt-5" *ngIf="isProcess">
+      <div class="col-md-8">
+        <div class="card">
+          <div class="card-body">
+            <div *ngIf="analyzStatus == -1" class="loading">
+                 <div class="fa fa-spinner fa-spin"></div>
+            </div>
+            <table class="table table-borderd"  *ngIf="analyzStatus == 1">
+              <tbody>
+                <tr>
+                  <td>HTML Version :</td>
+                  <td>{{analyzData.data.htmlVersion}}</td>
+                </tr>
+                <tr>
+                  <td>Page Title :</td>
+                  <td style="width: 50%">{{analyzData.data.title}}</td>
+                </tr>
+                <tr *ngFor="let item of analyzData.data.headings">
+                  <td *ngIf="item.value > 0">{{item.type}} Heading :</td>
+                  <td *ngIf="item.value > 0">{{item.value}}</td>
+                </tr>
+                <tr>
+                  <td>Internal Links :</td>
+                  <td>{{analyzData.data.internalLinks}}</td>
+                </tr>
+                <tr>
+                  <td>External Links :</td>
+                  <td>{{analyzData.data.externalLinks}}</td>
+                </tr>
+                <tr  *ngIf="analyzData.data.inaccessibleLinks > 0">
+                  <td>Inaccessible Links :</td>
+                  <td>{{analyzData.data.inaccessibleLinks}}</td>
+                </tr>
+                <tr>
+                  <td>Login Form available :</td>
+                  <td>{{(analyzData.data.isLoginForm)  ? "Yes" : "No"}}</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <div class="error-message" *ngIf="analyzStatus == 0">
+                Error {{analyzData.statusCode}} - Requested URL is {{analyzData.statusMessage}}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
